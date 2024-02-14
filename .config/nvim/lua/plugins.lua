@@ -49,7 +49,7 @@ return packer.startup(function(use)
   -- treesitter configuration
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("HiPhish/rainbow-delimiters.nvim")
-
+  use("lewis6991/gitsigns.nvim")
   use({
     "nvim-lualine/lualine.nvim",
     requires = { "nvim-tree/nvim-web-devicons", opt = true },
@@ -66,7 +66,13 @@ return packer.startup(function(use)
       require("toggleterm").setup()
     end,
   })
-  -- Lua
+  use({
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  })
   use({
     "folke/which-key.nvim",
     config = function()
