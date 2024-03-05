@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 local actions = require "telescope.actions"
-
+require("telescope").load_extension "project"
 telescope.setup {
   defaults = {
 
@@ -78,6 +78,9 @@ telescope.setup {
     },
   },
   pickers = {
+	find_files = {
+		hidden = true
+		}
     -- Default configuration for builtin pickers goes here:
     -- picker_name = {
     --   picker_config_key = value,
@@ -94,3 +97,4 @@ telescope.setup {
     -- please take a look at the readme of the extension you want to configure
   },
 }
+

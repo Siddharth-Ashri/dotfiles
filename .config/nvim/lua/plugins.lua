@@ -44,6 +44,7 @@ return packer.startup(function(use)
   use("EdenEast/nightfox.nvim")
   use("nvim-lua/plenary.nvim")
   use("nvim-telescope/telescope.nvim")
+  use("nvim-telescope/telescope-project.nvim")
   use("nvim-tree/nvim-web-devicons")
   use("sbdchd/neoformat")
   -- treesitter configuration
@@ -85,6 +86,8 @@ return packer.startup(function(use)
       })
     end,
   })
+  use({"folke/neodev.nvim"});
+  use({"tpope/vim-fugitive"});
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

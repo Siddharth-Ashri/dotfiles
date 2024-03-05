@@ -1,3 +1,4 @@
+require("neodev").setup({})
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = { "lua_ls", "tsserver", "biome", "ast_grep" },
@@ -16,6 +17,13 @@ local lspconfig = require("lspconfig")
 
 lspconfig.lua_ls.setup({
   on_attach = on_attach,
+  settings = {
+    Lua = {
+      completion = {
+        callSnippet = "Replace",
+      },
+    },
+  },
 })
 lspconfig.tsserver.setup({
   on_attach = on_attach,
