@@ -15,8 +15,11 @@ end
 
 local lspconfig = require("lspconfig")
 
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 lspconfig.lua_ls.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     Lua = {
       completion = {
@@ -27,10 +30,13 @@ lspconfig.lua_ls.setup({
 })
 lspconfig.tsserver.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
 })
 lspconfig.biome.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
 })
 lspconfig.ast_grep.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
 })

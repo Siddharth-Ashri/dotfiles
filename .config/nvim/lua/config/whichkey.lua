@@ -1,7 +1,6 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
-local keymap = vim.keymap -- for conciseness
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
   return
@@ -59,7 +58,7 @@ local setup = {
     spacing = 3, -- spacing between columns
     align = "left", -- align columns left, center or right
   },
-  ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+  ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
   triggers = "auto", -- automatically setup triggers
@@ -97,8 +96,8 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_ivy{previewer = true})<cr>",
     "Find files",
   },
-  ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-  ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  ["F"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args() theme=ivy<cr>", "Find Text" },
+  ["P"] = { "<cmd>lua require'telescope'.extensions.project.project{display_type='full'}<cr>", "Projects" },
 
   -- Packer
   p = {

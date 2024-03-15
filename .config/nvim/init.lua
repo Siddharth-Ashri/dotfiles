@@ -8,6 +8,7 @@ require("config.lualine")
 require("config.treesitter")
 require("config.rb_highlight")
 require("config.gitsigns")
+require("config.auto-cmp")
 vim.o.hidden = true
 vim.wo.relativenumber = true
 vim.wo.number = true

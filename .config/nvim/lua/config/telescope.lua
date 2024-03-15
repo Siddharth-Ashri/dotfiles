@@ -3,9 +3,11 @@ if not status_ok then
   return
 end
 
-local actions = require "telescope.actions"
-require("telescope").load_extension "project"
-telescope.setup {
+local actions = require("telescope.actions")
+telescope.load_extension("project")
+local project_actions = require("telescope._extensions.project.actions")
+
+telescope.setup({
   defaults = {
 
     prompt_prefix = " ",
@@ -78,9 +80,9 @@ telescope.setup {
     },
   },
   pickers = {
-	find_files = {
-		hidden = true
-		}
+    find_files = {
+      hidden = true,
+    },
     -- Default configuration for builtin pickers goes here:
     -- picker_name = {
     --   picker_config_key = value,
@@ -90,11 +92,18 @@ telescope.setup {
     -- builtin picker
   },
   extensions = {
+    project = {
+    theme = "full",
+    hidden = true,
+      base_dirs = {
+        "/home/siddharth-ashri/.config/nvim",
+        "~/code/work/newsletters"
+      },
+    },
     -- Your extension configuration goes here:
     -- extension_name = {
     --   extension_config_key = value,
     -- }
     -- please take a look at the readme of the extension you want to configure
   },
-}
-
+})

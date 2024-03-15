@@ -43,12 +43,22 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim") -- Have packer manage itself
   use("EdenEast/nightfox.nvim")
   use("nvim-lua/plenary.nvim")
-  use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-project.nvim")
+  use("nvim-telescope/telescope-live-grep-args.nvim")
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      {
+        "nvim-telescope/telescope-project.nvim",
+        "nvim-telescope/telescope-live-grep-args.nvim",
+      },
+    },
+  })
   use("nvim-tree/nvim-web-devicons")
   use("sbdchd/neoformat")
   -- treesitter configuration
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  use({ "nvim-treesitter/nvim-treesitter-context" })
   use("HiPhish/rainbow-delimiters.nvim")
   use("lewis6991/gitsigns.nvim")
   use({
@@ -86,8 +96,15 @@ return packer.startup(function(use)
       })
     end,
   })
-  use({"folke/neodev.nvim"});
-  use({"tpope/vim-fugitive"});
+  use({ "folke/neodev.nvim" })
+  use({ "tpope/vim-fugitive" })
+  use("hrsh7th/nvim-cmp")
+  use("hrsh7th/cmp-nvim-lsp")
+  use("hrsh7th/cmp-buffer")
+  use("hrsh7th/cmp-path")
+  use("hrsh7th/cmp-cmdline")
+  use("L3MON4D3/LuaSnip")
+
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
