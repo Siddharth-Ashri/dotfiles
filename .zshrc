@@ -108,3 +108,22 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export PATH=/home/linuxbrew/.linuxbrew/bin/s2i:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+alias cwac="~/code/work/account-centre"
+alias cwo="~/code/work/ocelot"
+alias cwad="~/code/work/amp-docker/"
+alias cwb="~/code/work/badjam/"
+alias cwn="~/code/work/newsletters/"
+alias cwnt="~/code/work/newsletter-templates/"
+alias cwnpa="~/code/work/news-publisher-api/"
+alias cwsc="~/code/personal/subscription-centre"
+alias cpb="~/code/personal/bash_udemy/"
+alias cpc="~/code/personal/c/"
+alias cpcli="~/code/personal/cli/"
+alias cplua="~/code/personal/lua/"
+alias cpts="~/code/personal/ts/"
+alias cpjs="~/code/personal/js/"
+alias switch_sink="pactl set-default-sink"
+alias nvim='nvim --listen /tmp/nvim-server.pipe'
+alias ss='systemctl suspend'
+alias vpnui=' /opt/cisco/anyconnect/bin/vpnui'
+alias ocb="sudo openconnect --background --useragent=AnyConnect ra2.cbc.ca"
