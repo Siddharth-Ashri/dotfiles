@@ -358,7 +358,17 @@ require('lazy').setup({
           --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           --   },
         },
-        -- pickers = {}
+        pickers = {
+          buffers = {
+            show_all_buffers = true,
+            sort_lastused = true,
+            mappings = {
+              i = {
+                ['<c-d>'] = 'delete_buffer',
+              },
+            },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -656,7 +666,6 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { 'javascript', 'js' }
         return {
           timeout_ms = 500,
           lsp_fallback = false,
@@ -664,7 +673,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- javascript = { { 'prettierd', 'prettier' } },
+        javascript = { { 'prettierd', 'prettier' } },
         -- json = { { 'prettierd', 'prettier' } },
         c = { 'clang-format' },
         -- Conform can also run multiple formatters sequentially
