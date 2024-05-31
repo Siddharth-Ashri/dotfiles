@@ -5,8 +5,11 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.opt.cc = '120'
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
+vim.o.expandtab = false
+vim.opt.modeline = false
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -24,15 +27,12 @@ vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in status line
 vim.opt.showmode = false
-
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
-
 -- Enable break indent
 vim.opt.breakindent = true
-
 -- Save undo history
 vim.opt.undofile = true
 
@@ -49,7 +49,7 @@ vim.opt.updatetime = 250
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
-
+vim.opt.relativenumber = true
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -59,10 +59,6 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
-vim.opt.expandtab = true
 vim.opt.autoindent = true
 
 -- Preview substitutions live, as you type!
@@ -77,7 +73,6 @@ vim.opt.scrolloff = 10
 --  Taken from the primeagen neovimrc
 vim.opt.guicursor = ''
 vim.opt.smartindent = true
--- vim.g.codeium_no_map_tab = 1
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- END custom code taken from primeagen neovim config
@@ -95,13 +90,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>ct', function()
-  return vim.cmd 'Codeium Toggle'
-end, { desc = '[C]odeium [T]oggle', expr = true, silent = true })
-
-vim.keymap.set('i', '<C-g>', function()
-  return vim.fn['codeium#Accept']()
-end, { expr = true, silent = true })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -617,7 +605,7 @@ require('lazy').setup({
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fiels' } },
+              diagnostics = { disable = { 'missing-fiels' } },
             },
           },
         },
@@ -674,6 +662,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         javascript = { { 'prettierd', 'prettier' } },
+        html = { { 'prettierd', 'prettier' } },
         -- json = { { 'prettierd', 'prettier' } },
         c = { 'clang-format' },
         -- Conform can also run multiple formatters sequentially
@@ -842,10 +831,6 @@ require('lazy').setup({
     end,
   },
   {
-    'Exafunction/codeium.vim',
-    event = 'BufEnter',
-  },
-  {
     'NTBBloodbath/galaxyline.nvim',
     config = function()
       require 'galaxyline.themes.eviline'
@@ -894,15 +879,6 @@ require('lazy').setup({
             return vim.fn.expand '%' ~= ''
           end,
           highlight = { colors.fg, colors.bg },
-        },
-      }
-      gls.mid[2] = {
-        Codeium_Status = {
-          provider = {
-            function()
-              return ' ' .. '{…}' .. vim.api.nvim_call_function('codeium#GetStatusString', {}) .. ' '
-            end,
-          },
         },
       }
     end,
@@ -989,9 +965,6 @@ require('lazy').setup({
         },
       }
     end,
-  },
-  {
-    'gsuuon/note.nvim',
   },
   {
     'rcarriga/nvim-dap-ui',
@@ -1088,4 +1061,3 @@ vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et

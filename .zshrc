@@ -126,4 +126,4 @@ alias switch_sink="pactl set-default-sink"
 alias nvim='nvim --listen /tmp/nvim-server.pipe'
 alias ss='systemctl suspend'
 alias vpnui=' /opt/cisco/anyconnect/bin/vpnui'
-alias ocb="sudo openconnect --background --useragent=AnyConnect ra2.cbc.ca"
+alias ocb='sudo openconnect --background --useragent="AnyConnect Linux_64 4.10.07061" ra2.cbc.ca'
