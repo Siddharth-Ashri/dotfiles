@@ -33,9 +33,10 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-set $TERMINAL terminator
+set $TERMINAL kitty
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
@@ -48,6 +49,21 @@ set $down k
 set $left j
 set $right semicolon
 
+
+# Assign workspaces to monitors
+workspace 1 output "DP-0"
+workspace 2 output "DP-4"
+workspace 3 output "DP-0"
+
+assign [class="Brave"] 1 
+assign [class="kitty"] 2 
+assign [class="Slack"] 3 
+assign [class="Postman"] 4
+
+exec --no-startup-id kitty 
+exec brave 
+exec slack 
+
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
 
@@ -56,7 +72,8 @@ floating_modifier Mod1
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym Mod1+Return exec $TERMINAL
+bindsym Mod1+Return exec --no-startup-id $TERMINAL 
+bindsym Mod1+Shift+Return exec --no-startup-id $TERMINAL zsh -c "~/.config/startup_scripts/open_window.sh"
 
 # kill focused window
 bindsym Mod1+Shift+q kill

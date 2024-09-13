@@ -115,7 +115,7 @@ alias cwb="~/code/work/badjam/"
 alias cwn="~/code/work/newsletters/"
 alias cwnt="~/code/work/newsletter-templates/"
 alias cwnpa="~/code/work/news-publisher-api/"
-alias cwsc="~/code/personal/subscription-centre"
+alias cwsc="~/code/work/subscription-centre"
 alias cpb="~/code/personal/bash_udemy/"
 alias cpc="~/code/personal/c/"
 alias cpcli="~/code/personal/cli/"
@@ -127,3 +127,8 @@ alias nvim='nvim --listen /tmp/nvim-server.pipe'
 alias ss='systemctl suspend'
 alias vpnui=' /opt/cisco/anyconnect/bin/vpnui'
 alias ocb='sudo openconnect --background --useragent="AnyConnect Linux_64 4.10.07061" ra2.cbc.ca'
+alias clearSwap='rm -r /home/siddharth-ashri/.local/state/nvim/swap//'
+# create new kitty window session
+alias nw='~/new-window.sh'
+
+
