@@ -280,6 +280,9 @@ require('lazy').setup({
             focusable = false,
           }),
         },
+        settings = {
+          tsserver_max_memory = 4096,
+        },
       }
     end,
   },
@@ -326,10 +329,10 @@ require('lazy').setup({
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
           if client and client.server_capabilities.documentHighlightProvider then
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-              buffer = event.buf,
-              callback = vim.lsp.buf.document_highlight,
-            })
+            -- vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            --   buffer = event.buf,
+            --   callback = vim.lsp.buf.document_highlight,
+            -- })
 
             vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
               buffer = event.buf,
@@ -412,7 +415,10 @@ require('lazy').setup({
   {
     'stevearc/conform.nvim',
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
+      default_format_opts = {
+        stop_after_first = true,
+      },
       format_on_save = function(bufnr)
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
@@ -424,9 +430,8 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        javascript = { { 'prettierd', 'prettier' } },
-        html = { { 'prettierd', 'prettier' } },
-        c = { 'clang-format' },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
       },
     },
   },
@@ -447,23 +452,8 @@ require('lazy').setup({
           end
           return 'make install_jsregexp'
         end)(),
-        dependencies = {
-          -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
-        },
       },
       'saadparwaiz1/cmp_luasnip',
-
-      -- Adds other completion capabilities.
-      --  nvim-cmp does not ship with all sources by default. They are split
-      --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
     },
@@ -642,7 +632,6 @@ require('lazy').setup({
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
         typescript = { 'eslint_d' },
       }
 
@@ -792,24 +781,54 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 
-local function is_cursor_on_symbol()
-  local ts_utils = require 'nvim-treesitter.ts_utils'
-  local node = ts_utils.get_node_at_cursor()
-  if node then
-    return true, node
+local function extract_imports_from_content(filename, content)
+  local file = io.open(filename, 'r')
+  if not file then
+    print('Error: cannot open file: ' .. filename)
+    return nil
   end
-  return false, nil
+
+  local imports_array = {}
+  for line in file:lines() do
+    if string.match(line, '^import') then
+      table.insert(imports_array, line)
+    end
+  end
+  return imports_array
 end
 
-local hover_delay = 5000
-vim.api.nvim_create_autocmd('CursorMoved', {
-  pattern = { '*.ts', '*.tsx', '*.js', '*.jsx' },
-  callback = function()
-    local on_symbol, node = is_cursor_on_symbol()
-    if on_symbol and node ~= nil then
-      vim.defer_fn(function()
-        vim.lsp.buf.hover()
-      end, hover_delay)
+local function overwrite_imports_to_file(filename, imports_array)
+  -- remove all lines that match a particular pattern. in this case starting with import
+  -- if pattern matches, then gsub that line to another line
+  local file = io.open(filename, 'r')
+
+  local contents = {}
+  local imports_index = 1
+  for line in file:lines() do
+    if string.match(line, '^' .. imports_array[imports_index]) then
+      line = imports_array[imports_index]
+      contents[imports_index] = line
+      imports_index = imports_index + 1
     end
-  end,
-})
+  end
+  file:close()
+
+  file = io.open(filename, 'w')
+  for _, line in ipairs(contents) do
+    file:write(line .. '\n')
+  end
+  file:close()
+end
+
+local function append_js_extension(opts)
+  local imports_array = extract_imports_from_content(opts.args) or {}
+  for index, import_string in ipairs(imports_array) do
+    import_string = string.sub(import_string, 1, -3) .. ".js';"
+    print 'importing string \n'
+    print(import_string)
+    imports_array[index] = import_string
+  end
+  overwrite_imports_to_file(opts.args, imports_array)
+end
+
+vim.keymap.set('n', '<leader>ajs', append_js_extension, {})

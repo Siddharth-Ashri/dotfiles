@@ -109,7 +109,7 @@ export PATH=/home/linuxbrew/.linuxbrew/bin/s2i:/home/linuxbrew/.linuxbrew/bin:/h
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 alias cwac="~/code/work/account-centre"
-alias cwo="~/code/work/ocelot"
+alias cwo="~/code/work/ocelot/pod/client-web/dynamic/"
 alias cwad="~/code/work/amp-docker/"
 alias cwb="~/code/work/badjam/"
 alias cwn="~/code/work/newsletters/"
@@ -123,12 +123,12 @@ alias cplua="~/code/personal/lua/"
 alias cpts="~/code/personal/ts/"
 alias cpjs="~/code/personal/js/"
 alias switch_sink="pactl set-default-sink"
-alias nvim='nvim --listen /tmp/nvim-server.pipe'
+alias vim='nvim .'
 alias ss='systemctl suspend'
 alias vpnui=' /opt/cisco/anyconnect/bin/vpnui'
 alias ocb='sudo openconnect --background --useragent="AnyConnect Linux_64 4.10.07061" ra2.cbc.ca'
 alias clearSwap='rm -r /home/siddharth-ashri/.local/state/nvim/swap//'
 # create new kitty window session
 alias nw='~/new-window.sh'
-
+alias syspa='systemctl --user stop pipewire-pulse.socket pipewire.socket && systemctl --user start pulseaudio.socket'
 
