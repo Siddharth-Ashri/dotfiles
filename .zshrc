@@ -109,7 +109,7 @@ export PATH=/home/linuxbrew/.linuxbrew/bin/s2i:/home/linuxbrew/.linuxbrew/bin:/h
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 alias cwac="~/code/work/account-centre"
-alias cwo="~/code/work/ocelot/pod/client-web/dynamic/"
+alias cwo="~/code/work/ocelot/"
 alias cwad="~/code/work/amp-docker/"
 alias cwb="~/code/work/badjam/"
 alias cwn="~/code/work/newsletters/"

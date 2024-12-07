@@ -3,6 +3,8 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 vim.o.expandtab = false
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 
 vim.opt.cc = '120'
 vim.opt.modeline = false
@@ -52,7 +54,7 @@ vim.keymap.set('n', '<leader>qd', function()
   require('persistence').stop()
 end, { desc = '[Q]uick [D]elete' })
 
-vim.keymap.set('n', '<leader>lg', '<cmd>LazyGit<CR>', { desc = 'Open LazyGit' })
+vim.keymap.set('n', '<leader>lg', '<cmd>LazyGitCurrentFile<CR>', { desc = 'Open LazyGit' })
 vim.diagnostic.config {
   underline = true,
   virtual_text = true,
@@ -432,6 +434,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         javascript = { 'prettier' },
         typescript = { 'prettier' },
+        javascriptreact = { 'prettier' },
       },
     },
   },
@@ -633,6 +636,7 @@ require('lazy').setup({
       local lint = require 'lint'
       lint.linters_by_ft = {
         typescript = { 'eslint_d' },
+        javascript = { 'eslint_d' },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
