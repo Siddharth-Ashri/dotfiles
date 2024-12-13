@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+CUSTOM_PACKAGE_LOCATION_SYSTEM=/usr/local/bin
+export PATH=$PATH:$CUSTOM_PACKAGE_LOCATION_SYSTEM
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
@@ -102,7 +102,6 @@ source $ZSH/oh-my-zsh.sh
 # start ssh
 eval $(ssh-agent)
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
 alias config='/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME'
 alias cwac="~/code/work/account-centre"
 alias cwo="~/code/work/ocelot/"
@@ -132,5 +131,11 @@ alias syspa='systemctl --user stop pipewire-pulse.socket pipewire.socket && syst
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH=$PATH:$HOME/.nvm/versions/node/v20.16.0/bin/npm
-export PATH="$PATH:/opt/nvim-linux64/bin"
+
+OPTIONAL_LOCATIONS=/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+NVIM_BIN_PATH=/opt/nvim-linux64/bin
+GO_BIN_PATH=/usr/local/go/bin
+LOCAL_BINARIES=$HOME/.local/bin
+
+export PATH=$PATH:$OPTIONAL_LOCATIONS:$NVIM_BIN_PATH:$GO_BIN_PATH:$LOCAL_BINARIES
+export PKG_CONFIG_PATH="/usr/bin/pkg-config"
