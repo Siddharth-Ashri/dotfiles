@@ -1,1 +1,1 @@
-require 'JSComment'
+require 'custom.plugins.sessions'

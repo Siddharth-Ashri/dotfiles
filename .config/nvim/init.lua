@@ -2,9 +2,9 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
-vim.o.expandtab = false
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
 vim.o.laststatus = 3
 
 vim.opt.cc = '120'
@@ -598,25 +598,25 @@ require('lazy').setup({
             require('nvim-treesitter.configs').setup(opts)
         end,
     },
-    {
-        'mfussenegger/nvim-lint',
-        event = { 'BufReadPre', 'BufNewFile' },
-        config = function ()
-            local lint = require 'lint'
-            lint.linters_by_ft = {
-                typescript = { 'eslint_d' },
-                javascript = { 'eslint_d' },
-            }
-
-            local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
-            vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
-                group = lint_augroup,
-                callback = function ()
-                    lint.try_lint()
-                end,
-            })
-        end,
-    },
+    -- {
+    --     'mfussenegger/nvim-lint',
+    --     event = { 'BufReadPre', 'BufNewFile' },
+    --     config = function ()
+    --         local lint = require 'lint'
+    --         lint.linters_by_ft = {
+    --             typescript = { 'eslint_d' },
+    --             javascript = { 'eslint_d' },
+    --         }
+    --
+    --         local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
+    --         vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+    --             group = lint_augroup,
+    --             callback = function ()
+    --                 lint.try_lint()
+    --             end,
+    --         })
+    --     end,
+    -- },
     {
         'mxsdev/nvim-dap-vscode-js',
         dependencies = { 'mfussenegger/nvim-dap' },

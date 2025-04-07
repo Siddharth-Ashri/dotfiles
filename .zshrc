@@ -104,6 +104,7 @@ eval $(ssh-agent)
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME'
 alias cwac="~/code/work/account-centre"
+alias cw="~/code/work"
 alias cwo="~/code/work/ocelot/"
 alias cwad="~/code/work/amp-docker/"
 alias cwb="~/code/work/badjam/"
