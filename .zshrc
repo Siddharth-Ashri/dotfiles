@@ -102,32 +102,7 @@ source $ZSH/oh-my-zsh.sh
 # start ssh
 eval $(ssh-agent)
 
-alias config='/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME'
-alias cwac="~/code/work/account-centre"
-alias cw="~/code/work"
-alias cwo="~/code/work/ocelot/"
-alias cwad="~/code/work/amp-docker/"
-alias cwb="~/code/work/badjam/"
-alias cwn="~/code/work/newsletters/"
-alias cwnt="~/code/work/newsletter-templates/"
-alias cwnpa="~/code/work/news-publisher-api/"
-alias cwsc="~/code/work/subscription-centre"
-alias cpb="~/code/personal/bash_udemy/"
-alias cpc="~/code/personal/c/"
-alias cpcli="~/code/personal/cli/"
-alias cplua="~/code/personal/lua/"
-alias cpts="~/code/personal/ts/"
-alias cpjs="~/code/personal/js/"
-alias switch_sink="pactl set-default-sink"
-alias vim='nvim .'
-alias ss='systemctl suspend'
-alias vpnui=' /opt/cisco/anyconnect/bin/vpnui'
-alias ocb='sudo openconnect --background --useragent="AnyConnect Linux_64 4.10.07061" ra2.cbc.ca'
-alias clearSwap='rm -r /home/siddharth-ashri/.local/state/nvim/swap//'
-# create new kitty window session
-alias nw='~/new-window.sh'
-alias syspa='systemctl --user stop pipewire-pulse.socket pipewire.socket && systemctl --user start pulseaudio.socket'
-
+source ~/.aliases
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -140,3 +115,7 @@ LOCAL_BINARIES=$HOME/.local/bin
 
 export PATH=$PATH:$OPTIONAL_LOCATIONS:$NVIM_BIN_PATH:$GO_BIN_PATH:$LOCAL_BINARIES
 export PKG_CONFIG_PATH="/usr/bin/pkg-config"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
